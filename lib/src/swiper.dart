@@ -72,6 +72,7 @@ class Swiper extends StatefulWidget {
     this.scale,
     this.fade,
     this.allowImplicitScrolling = false,
+    this.clipBehavior = Clip.hardEdge,
   })  : assert(
           itemBuilder != null || transformer != null,
           'itemBuilder and transformItemBuilder must not be both null',
@@ -246,6 +247,8 @@ class Swiper extends StatefulWidget {
   final PageIndicatorLayout indicatorLayout;
 
   final bool allowImplicitScrolling;
+
+  final Clip clipBehavior;
 
   static Swiper list<T>({
     PageTransformer? transformer,
@@ -526,6 +529,7 @@ class _SwiperState extends _SwiperTimerMixin {
         physics: widget.physics,
         controller: _controller,
         allowImplicitScrolling: widget.allowImplicitScrolling,
+        clipBehavior: widget.clipBehavior,
       );
       if (widget.autoplayDisableOnInteraction && widget.autoplay) {
         return NotificationListener(

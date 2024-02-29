@@ -227,6 +227,7 @@ class TransformerPageView extends StatefulWidget {
     this.allowImplicitScrolling = false,
     this.itemBuilder,
     this.pageController,
+    this.clipBehavior = Clip.hardEdge,
     required this.itemCount,
   })  : assert(itemCount == 0 || itemBuilder != null || transformer != null),
         duration = duration ??
@@ -319,6 +320,8 @@ class TransformerPageView extends StatefulWidget {
   final int? index;
 
   final bool allowImplicitScrolling;
+
+  final Clip clipBehavior;
 
   @override
   State<StatefulWidget> createState() => _TransformerPageViewState();
@@ -427,6 +430,7 @@ class _TransformerPageViewState extends State<TransformerPageView> {
   Widget build(BuildContext context) {
     final builder = _transformer == null ? _buildItemNormal : _buildItem;
     final child = PageView.builder(
+      clipBehavior: widget.clipBehavior,
       allowImplicitScrolling: widget.allowImplicitScrolling,
       itemBuilder: builder,
       itemCount: _pageController.getRealItemCount(),
